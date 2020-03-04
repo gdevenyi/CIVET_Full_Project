@@ -1,6 +1,14 @@
 FROM ubuntu:18.04 as base
-RUN ["apt-get", "update", "-qq"]
-RUN ["apt-get", "install", "-qq", "--no-install-recommends", "perl", "imagemagick", "gnuplot-nox", "locales"]
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    perl \
+    imagemagick \
+    gnuplot-nox \
+    locales \
+  && rm -rf /var/lib/apt/lists/* \
+  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+ENV LANG en_US.utf8
 
 FROM base as builder
 RUN ["apt-get", "install", "-qq", "git-lfs"]
