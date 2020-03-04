@@ -62,4 +62,5 @@ ENV PATH=$MNIBASEPATH/$CIVET:$MNIBASEPATH/$CIVET/progs:$MNIBASEPATH/bin:$PATH \
     MINC_COMPRESS=4 \
     CIVET_JOB_SCHEDULER=DEFAULT
 
-CMD ["/opt/CIVET/Linux-x86_64/CIVET-2.1.1/CIVET_Processing_Pipeline", "-help"]
+ENTRYPOINT ["CIVET_Processing_Pipeline"]
+CMD ["-help"]
