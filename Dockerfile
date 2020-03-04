@@ -11,12 +11,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV LANG en_US.utf8
 
 FROM base as builder
-RUN ["apt-get", "install", "-qq", "git-lfs"]
 
-RUN ["apt-get", "install", "-qq", "build-essential", "automake", "libtool", "bison"]
-RUN ["apt-get", "install", "-qq", "libz-dev", "libjpeg-dev", "libpng-dev", "libtiff-dev", \
-    "liblcms2-dev", "flex", "libx11-dev", "freeglut3-dev", \
-    "libxmu-dev", "libxi-dev", "libqt4-dev"]
+RUN apt-get update && apt-get install -y \
+    git-lfs \
+    build-essential automake libtool bison \
+    libz-dev libjpeg-dev libpng-dev libtiff-dev \
+    liblcms2-dev flex libx11-dev freeglut3-dev libxmu-dev \
+    libxi-dev libqt4-dev libxml2-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN ["rm", "/bin/sh"]
 RUN ["ln", "-s", "/bin/bash", "/bin/sh"]
